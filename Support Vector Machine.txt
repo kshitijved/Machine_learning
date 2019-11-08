@@ -1,0 +1,19 @@
+from sklearn import datasets, svm
+from sklearn.model_selection import train_test_split,cross_val_score
+from sklearn.metrics import accuracy_score 
+wine = datasets.load_wine()
+train_data, test_data, train_target, test_target   =  train_test_split(wine.data, wine.target, random_state = 0, test_size = 0.25)
+clf = svm.SVC(kernel='linear', C=1)
+#training
+clf.fit(train_data,train_target)
+predicted_target = clf.predict(test_data)
+accuracy_score(test_target,predicted_target) * 100
+
+
+
+
+
+
+
+scores = cross_val_score(clf, wine.data, wine.target, cv=5)
+print(scores)
